@@ -10,7 +10,7 @@ int main() {
 
   // Simulation parameters
   int k = 10;
-  int n_tests = 200;  // 2000
+  int n_tests = 2000;
   int n_steps = 1000;
 
   std::default_random_engine generator;
