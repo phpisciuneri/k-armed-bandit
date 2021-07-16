@@ -10,7 +10,6 @@ public:
 
   explicit Reinforcement_learning(int n_actions) : k(n_actions) {
     q_est.resize(k, 0);
-    sum_rewards.resize(k, 0);
     action_count.resize(k, 0);
   }
 
@@ -19,9 +18,8 @@ public:
   }
 
   void update_action_value_estimate(size_t action, double reward) {
-    sum_rewards[action] += reward;
     action_count[action] += 1;
-    q_est[action] = sum_rewards[action] / action_count[action];
+    q_est[action] += (reward - q_est[action]) / action_count[action];
   }
 
 private:
@@ -33,7 +31,6 @@ private:
   std::vector<double> q_est;
 
   // sample average buffers
-  std::vector<double> sum_rewards;
   std::vector<int> action_count;
 
 };
