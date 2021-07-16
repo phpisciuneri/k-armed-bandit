@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include <fstream>
 
 #include "multi_armed_bandit.hpp"
 #include "reinforcement_learning.hpp"
@@ -34,9 +35,14 @@ int main() {
   }
 
   std::cout << "Average reward per time step:" << std::endl;
+  std::ofstream out;
+  out.open("greedy.csv");
   for (int j=0; j<n_steps; j++) {
-    std::cout << j << ": " << total_reward[j] / n_tests << std::endl;
+    double avg_reward = total_reward[j] / n_tests;
+    std::cout << j + 1 << ": " << avg_reward << std::endl;
+    out << j + 1 << ", " << avg_reward << std::endl;
   }
+  out.close();
 
   return 0;
 }
